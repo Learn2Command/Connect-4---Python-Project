@@ -478,15 +478,15 @@ Label(
     image=img
 ).pack()
 
-lbl=Label(root, text=""" 
+lbl = Label(root, text="""
+Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
+""", fg='blue', font=("Helvetica", 10), background='white')
+lbl.place(x=40,y=195)
+lbl.pack(expand=YES, fill=BOTH)
 
-Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera 
-
-""", fg='blue', font=("Helvetica", 16))
-
-twoplayer = Button(root, text="Local Multiplayer", pady=10, padx=20, command=two_player)
-playcomp = Button(root, text="Play Computer", pady=10, padx=20, command=play_comp)
-quitbutton = Button(root, text="Quit", pady=10, padx=20, command=root.destroy)
+twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
+playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp)
+quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
 twoplayer.pack()
 playcomp.pack()
 quitbutton.pack()
