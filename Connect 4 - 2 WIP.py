@@ -26,7 +26,8 @@ ROW_COUNT = 6
 COLUMN_COUNT = 7
 
 
-#Defining a function for playing with two local players. This function will be called to the menu button twoplayer and run the Connect 4 code that allows players to alternate.
+#Defining a function for playing with two local players. 
+#This function will be called to the menu button twoplayer and run the Connect 4 code that allows players to alternate.
 
 
 def two_player():
@@ -77,6 +78,7 @@ def two_player():
                         board[r - 3][c + 3] == piece:
                     return True
 
+        # Drawing the board with rectangle and circles, as well as adding the colors and sizes.
     def draw_board(board):
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
