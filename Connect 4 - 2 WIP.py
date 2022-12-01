@@ -29,7 +29,6 @@ COLUMN_COUNT = 7
 #Defining a function for playing with two local players. 
 #This function will be called to the menu button twoplayer and run the Connect 4 code that allows players to alternate.
 
-
 def two_player():
     def create_board():
         board = np.zeros((ROW_COUNT, COLUMN_COUNT))
