@@ -359,6 +359,7 @@ def play_comp():
 
         return best_col
 
+      # Drawing the board with rectangle and circles, as well as adding the colors and sizes.
     def draw_board(board):
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
