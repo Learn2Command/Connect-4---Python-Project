@@ -492,7 +492,7 @@ playcomp.pack()
 quitbutton.pack()
 
 
-pygame.mixer.music.load('FunkyMusicwcomp.wav')
+pygame.mixer.music.load('arcademusic.wav')
 pygame.mixer.music.play(-1,0.0)
 musicPlaying = True
 
