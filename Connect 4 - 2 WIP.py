@@ -116,13 +116,14 @@ def two_player():
     pygame.display.update()
 
     myfont = pygame.font.SysFont("monospace", 75)
-
+       
+        # Game Loop
     while not game_over:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-
+            # Mouse Button event is based on whose turn it is and drops the piece based off of that.
             if event.type == pygame.MOUSEMOTION:
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
                 posx = event.pos[0]
@@ -135,7 +136,8 @@ def two_player():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
                 # print(event.pos)
-                # Ask for Player 1 Input
+                
+                # Ask for Player 1 Input (Red)
                 if turn == 0:
                     posx = event.pos[0]
                     col = int(math.floor(posx / SQUARESIZE))
@@ -150,7 +152,7 @@ def two_player():
                             game_over = True
 
 
-                # # Ask for Player 2 Input
+                # Ask for Player 2 Input (Yellow)
                 else:
                     posx = event.pos[0]
                     col = int(math.floor(posx / SQUARESIZE))
@@ -166,7 +168,8 @@ def two_player():
 
                 print_board(board)
                 draw_board(board)
-
+                # The only way a turn can change is after a valid piece has been dropped. It will then start back at the top of the loop 
+                # and wait until the player picks.
                 turn += 1
                 turn = turn % 2
 
@@ -205,44 +208,46 @@ def play_comp():
         print(np.flip(board, 0))
 
     def winning_move(board, piece):
-        # Check horizontal locations for win
+        # Check Horizontal locations for win
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT):
                 if board[r][c] == piece and board[r][c + 1] == piece and board[r][c + 2] == piece and board[r][
                     c + 3] == piece:
                     return True
 
-        # Check vertical locations for win
+        # Check Vertical locations for win
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][
                     c] == piece:
                     return True
 
-        # Check positively sloped diaganols
+        # Check Positively sloped diaganols
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and \
                         board[r + 3][c + 3] == piece:
                     return True
 
-        # Check negatively sloped diaganols
+        # Check Negatively sloped diaganols
         for c in range(COLUMN_COUNT - 3):
             for r in range(3, ROW_COUNT):
                 if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and \
                         board[r - 3][c + 3] == piece:
                     return True
-
+    
+    # The code below.
     def evaluate_window(window, piece):
         score = 0
         opp_piece = PLAYER_PIECE
         if piece == PLAYER_PIECE:
             opp_piece = AI_PIECE
-
+ 
+        # This function corresponds with the score positions. 
         if window.count(piece) == 4:
             score += 100
         elif window.count(piece) == 3 and window.count(EMPTY) == 1:
-            score += 5
+            score += 5 # We weight us getting a three in a row vs the AI (opp_piece).
         elif window.count(piece) == 2 and window.count(EMPTY) == 2:
             score += 2
 
@@ -250,10 +255,13 @@ def play_comp():
             score -= 4
 
         return score
-
+    
     def score_position(board, piece):
         score = 0
-
+        
+        # Scoring the center columns and adding preference for center pieces.
+        # Creates more opportunities with the diagnols, horizontals, etc. if you have the center pieces. 
+        # Using an array to store multiple values and i as a temporary variable to store the integer value.
         ## Score center column
         center_array = [int(i) for i in list(board[:, COLUMN_COUNT // 2])]
         center_count = center_array.count(piece)
@@ -273,19 +281,20 @@ def play_comp():
                 window = col_array[r:r + WINDOW_LENGTH]
                 score += evaluate_window(window, piece)
 
-        ## Score posiive sloped diagonal
+        ## Score Positive sloped diagonal
         for r in range(ROW_COUNT - 3):
             for c in range(COLUMN_COUNT - 3):
                 window = [board[r + i][c + i] for i in range(WINDOW_LENGTH)]
                 score += evaluate_window(window, piece)
-
+       
+        ## Score Negative sloped diaganols
         for r in range(ROW_COUNT - 3):
             for c in range(COLUMN_COUNT - 3):
                 window = [board[r + 3 - i][c + i] for i in range(WINDOW_LENGTH)]
                 score += evaluate_window(window, piece)
 
         return score
-
+    # We are defining who wins the game: us, the opponent, or if all the pieces were used for a total of three conditions.
     def is_terminal_node(board):
         return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(
             get_valid_locations(board)) == 0
@@ -302,8 +311,8 @@ def play_comp():
                 else:  # Game is over, no more valid moves
                     return (None, 0)
             else:  # Depth is zero
-                return (None, score_position(board, AI_PIECE))
-        if maximizingPlayer:
+                return (None, score_position(board, AI_PIECE)) 
+        if maximizingPlayer: # AI player
             value = -math.inf
             column = random.choice(valid_locations)
             for col in valid_locations:
@@ -319,7 +328,7 @@ def play_comp():
                     break
             return column, value
 
-        else:  # Minimizing player
+        else:  # Minimizing player (Us)
             value = math.inf
             column = random.choice(valid_locations)
             for col in valid_locations:
@@ -327,14 +336,15 @@ def play_comp():
                 b_copy = board.copy()
                 drop_piece(b_copy, row, col, PLAYER_PIECE)
                 new_score = minimax(b_copy, depth - 1, alpha, beta, True)[1]
-                if new_score < value:
+                if new_score < value: 
                     value = new_score
                     column = col
                 beta = min(beta, value)
                 if alpha >= beta:
                     break
-            return column, value
-
+            return column, value # Returns the score and column that produced that score.
+  
+    # Shows which columns we can drop a piece in and evaluate from there. We create an empty list since we don't have to figure out if it's valid or not.
     def get_valid_locations(board):
         valid_locations = []
         for col in range(COLUMN_COUNT):
@@ -343,7 +353,7 @@ def play_comp():
         return valid_locations
 
     def pick_best_move(board, piece):
-
+        # We created a new memory location (temp_board and board.copy()) so that it doesn't modify the original board while also keeping track of the score.
         valid_locations = get_valid_locations(board)
         best_score = -10000
         best_col = random.choice(valid_locations)
