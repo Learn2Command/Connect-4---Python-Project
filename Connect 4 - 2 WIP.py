@@ -1,4 +1,4 @@
-#Importing global modules that will be used to run menu, pygame, AI functions.
+# Importing global modules that will be used to run menu, pygame, AI functions.
 
 from tkinter import *
 import numpy as np
@@ -8,7 +8,7 @@ import sys
 import math
 
 pygame.init() # Initialize all imported pygame modules.
-pygame.event.get() # Handles the internal events ana retrieves a list of external events.
+pygame.event.get() # Handles the internal events and retrieves a list of external events.
 
 # Setting global variable colors for board and pieces.
 
