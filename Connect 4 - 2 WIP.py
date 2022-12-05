@@ -1,4 +1,4 @@
-#Importing global modules that will be used to run menu, pygame, AI functions
+#Importing global modules that will be used to run menu, pygame, AI functions.
 
 from tkinter import *
 import numpy as np
@@ -7,10 +7,10 @@ import pygame
 import sys
 import math
 
-pygame.init()
-pygame.event.get()
+pygame.init() # Initialize all imported pygame modules.
+pygame.event.get() # Handles the internal events ana retrieves a list of external events.
 
-#Setting global variable colors for board and pieces
+# Setting global variable colors for board and pieces.
 
 BLUE = (0,0,255)
 BLACK = (0,0,0)
@@ -20,14 +20,14 @@ WHITE = (255,255,255)
 BLACK = WHITE
 
 
-#Setting global variables for row and column count for the game board
+# Setting global variables for row and column count for the game board.
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 
 
-#Defining a function for playing with two local players. 
-#This function will be called to the menu button twoplayer and run the Connect 4 code that allows players to alternate.
+# Defining a function for playing with two local players. 
+# This function will be called to the menu button twoplayer and run the Connect 4 code that allows players to alternate.
 
 def two_player():
     def create_board():
@@ -49,28 +49,28 @@ def two_player():
         print(np.flip(board, 0))
 
     def winning_move(board, piece):
-        # Check horizontal locations for win
+        # Check horizontal locations for win.
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT):
                 if board[r][c] == piece and board[r][c + 1] == piece and board[r][c + 2] == piece and board[r][
                     c + 3] == piece:
                     return True
 
-        # Check vertical locations for win
+        # Check vertical locations for win.
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][
                     c] == piece:
                     return True
 
-        # Check positively sloped diaganols
+        # Check positively sloped diaganols.
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and \
                         board[r + 3][c + 3] == piece:
                     return True
 
-        # Check negatively sloped diaganols
+        # Check negatively sloped diaganols.
         for c in range(COLUMN_COUNT - 3):
             for r in range(3, ROW_COUNT):
                 if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and \
@@ -117,7 +117,7 @@ def two_player():
 
     myfont = pygame.font.SysFont("monospace", 75)
        
-        # Game Loop
+        # Game Loop.
     while not game_over:
 
         for event in pygame.event.get():
@@ -137,7 +137,7 @@ def two_player():
                 pygame.draw.rect(screen, BLACK, (0, 0, width, SQUARESIZE))
                 # print(event.pos)
                 
-                # Ask for Player 1 Input (Red)
+                # Ask for Player 1 Input (Red).
                 if turn == 0:
                     posx = event.pos[0]
                     col = int(math.floor(posx / SQUARESIZE))
@@ -152,7 +152,7 @@ def two_player():
                             game_over = True
 
 
-                # Ask for Player 2 Input (Yellow)
+                # Ask for Player 2 Input (Yellow).
                 else:
                     posx = event.pos[0]
                     col = int(math.floor(posx / SQUARESIZE))
@@ -168,7 +168,7 @@ def two_player():
 
                 print_board(board)
                 draw_board(board)
-                # The only way a turn can change is after a valid piece has been dropped. It will then start back at the top of the loop 
+                # The only way a turn can change is after a valid piece has been dropped. It will then start back at the top of the loop.
                 # and wait until the player picks.
                 turn += 1
                 turn = turn % 2
@@ -177,7 +177,7 @@ def two_player():
                     pygame.time.wait(3000)
 
 
-#Defining a function for playing against AI/Computer. This function will be called to the menu button playcomp and run the Connect 4 with AI code held within.
+# Defining a function for playing against AI/Computer. This function will be called to the menu button playcomp and run the Connect 4 with AI code held within.
 
 def play_comp():
     PLAYER = 0
@@ -215,21 +215,21 @@ def play_comp():
                     c + 3] == piece:
                     return True
 
-        # Check Vertical locations for win
+        # Check Vertical locations for win.
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][
                     c] == piece:
                     return True
 
-        # Check Positively sloped diaganols
+        # Check Positively sloped diaganols.
         for c in range(COLUMN_COUNT - 3):
             for r in range(ROW_COUNT - 3):
                 if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and \
                         board[r + 3][c + 3] == piece:
                     return True
 
-        # Check Negatively sloped diaganols
+        # Check Negatively sloped diaganols.
         for c in range(COLUMN_COUNT - 3):
             for r in range(3, ROW_COUNT):
                 if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and \
@@ -262,32 +262,32 @@ def play_comp():
         # Scoring the center columns and adding preference for center pieces.
         # Creates more opportunities with the diagnols, horizontals, etc. if you have the center pieces. 
         # Using an array to store multiple values and i as a temporary variable to store the integer value.
-        ## Score center column
+        ## Score center column.
         center_array = [int(i) for i in list(board[:, COLUMN_COUNT // 2])]
         center_count = center_array.count(piece)
         score += center_count * 3
 
-        ## Score Horizontal
+        ## Score Horizontal.
         for r in range(ROW_COUNT):
             row_array = [int(i) for i in list(board[r, :])]
             for c in range(COLUMN_COUNT - 3):
                 window = row_array[c:c + WINDOW_LENGTH]
                 score += evaluate_window(window, piece)
 
-        ## Score Vertical
+        ## Score Vertical.
         for c in range(COLUMN_COUNT):
             col_array = [int(i) for i in list(board[:, c])]
             for r in range(ROW_COUNT - 3):
                 window = col_array[r:r + WINDOW_LENGTH]
                 score += evaluate_window(window, piece)
 
-        ## Score Positive sloped diagonal
+        ## Score Positive sloped diagonal.
         for r in range(ROW_COUNT - 3):
             for c in range(COLUMN_COUNT - 3):
                 window = [board[r + i][c + i] for i in range(WINDOW_LENGTH)]
                 score += evaluate_window(window, piece)
        
-        ## Score Negative sloped diaganols
+        ## Score Negative sloped diaganols.
         for r in range(ROW_COUNT - 3):
             for c in range(COLUMN_COUNT - 3):
                 window = [board[r + 3 - i][c + i] for i in range(WINDOW_LENGTH)]
@@ -328,7 +328,7 @@ def play_comp():
                     break
             return column, value
 
-        else:  # Minimizing player (Us)
+        else:  # Minimizing player (Us).
             value = math.inf
             column = random.choice(valid_locations)
             for col in valid_locations:
@@ -446,7 +446,7 @@ def play_comp():
                         print_board(board)
                         draw_board(board)
 
-        # # Ask for Player 2 Input
+        # Ask for Player 2 Input.
         if turn == AI and not game_over:
 
             # col = random.randint(0, COLUMN_COUNT-1)
