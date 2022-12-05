@@ -473,6 +473,7 @@ def play_comp():
             pygame.time.wait(3000)
 
 
+##Recalling root through tkinter 
 
 root = Tk()
 
@@ -496,6 +497,8 @@ Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
 
+
+# Quit button to shut down application
 twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
 playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp)
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
