@@ -473,32 +473,29 @@ def play_comp():
             pygame.time.wait(3000)
 
 
-# Recalling root through tkinter. 
-
+# 
 root = Tk()
-
-menubar = Menu(root)
+# Adds a Menu to choose between local or AI.
+menubar = Menu(root) 
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_separator()
 filemenu.add_command(label="Exit", command=root.quit)
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
 
-root.title('Connect 4')
-img = PhotoImage(file='connect4logo.png')
+root.title('Connect 4') # Title of the game.
+img = PhotoImage(file='connect4logo.png') # Importing the image we want to display as our logo.
 Label(
     root,
     image=img
 ).pack()
-
+# Adds a label to display group names.
 lbl = Label(root, text="""
 Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 """, fg='blue', font=("Helvetica", 10), background='white')
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
-
-
-# Quit button to shut down application.
+# Adds the option to choose between local or AI on the menu.
 twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
 playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp)
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
@@ -506,7 +503,7 @@ twoplayer.pack()
 playcomp.pack()
 quitbutton.pack()
 
-
+# Adds background music while playing the game.
 pygame.mixer.music.load('arcademusic.wav')
 pygame.mixer.music.play(-1,0.0)
 musicPlaying = True
