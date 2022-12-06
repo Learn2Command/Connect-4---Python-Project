@@ -115,7 +115,7 @@ def two_player():
     draw_board(board)
     pygame.display.update()
 
-    myfont = pygame.font.SysFont("monospace", 75)
+    myfont = pygame.font.SysFont("Veranda", 75)
        
         # Game Loop.
     while not game_over:
@@ -411,7 +411,7 @@ def play_comp():
     draw_board(board)
     pygame.display.update()
 
-    myfont = pygame.font.SysFont("monospace", 75)
+    myfont = pygame.font.SysFont("Veranda", 75)
 
     turn = random.randint(PLAYER, AI)
 
