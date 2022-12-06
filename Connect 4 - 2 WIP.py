@@ -174,8 +174,14 @@ def two_player():
                 turn = turn % 2
 
                 if game_over:
-                    pygame.time.wait(3000)
-
+                    pygame.time.wait(1)
+    from sys import exit
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+                
 
 # Defining a function for playing against AI/Computer. This function will be called to the menu button playcomp and run the Connect 4 with AI code held within.
 
@@ -470,12 +476,21 @@ def play_comp():
                 turn = turn % 2
 
         if game_over:
-            pygame.time.wait(3000)
+            pygame.time.wait(1)
+    
+    from sys import exit
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
-
-# 
+# Setting root variable to call Tkinter
+ 
 root = Tk()
-# Adds a Menu to choose between local or AI.
+
+# Adds a Menu to choose between local or AI / main menu with Tkinter.
+
 menubar = Menu(root) 
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_separator()
@@ -483,19 +498,26 @@ filemenu.add_command(label="Exit", command=root.quit)
 menubar.add_cascade(label="File", menu=filemenu)
 root.config(menu=menubar)
 
-root.title('Connect 4') # Title of the game.
+# Title of the game. Importing png file to use as logo on main menu
+
+
+root.title('Connect 4') 
 img = PhotoImage(file='connect4logo.png') # Importing the image we want to display as our logo.
 Label(
     root,
     image=img
 ).pack()
+
 # Adds a label to display group names.
+
 lbl = Label(root, text="""
 Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 """, fg='blue', font=("Helvetica", 10), background='white')
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
-# Adds the option to choose between local or AI on the menu.
+
+# Adds the option to choose between local, vs Comp play, or Quit on the menu using TKinter.
+
 twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
 playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp)
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
@@ -503,7 +525,8 @@ twoplayer.pack()
 playcomp.pack()
 quitbutton.pack()
 
-# Adds background music while playing the game.
+# Adds background music while playing the game by importing file
+
 pygame.mixer.music.load('arcademusic.wav')
 pygame.mixer.music.play(-1,0.0)
 musicPlaying = True
