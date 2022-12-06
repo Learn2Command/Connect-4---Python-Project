@@ -6,6 +6,7 @@ import random
 import pygame
 import sys
 import math
+from PIL import Image, ImageTk
 
 pygame.init() # Initialize all imported pygame modules.
 pygame.event.get() # Handles the internal events and retrieves a list of external events.
