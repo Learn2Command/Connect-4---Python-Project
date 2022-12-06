@@ -508,6 +508,12 @@ Label(
     image=img
 ).pack()
 
+# Icon Clip Art
+
+ico = Image.open('Connect 4 clip art.png')
+photo = ImageTk.PhotoImage(ico)
+root.wm_iconphoto(False, photo)
+
 # Adds a label to display group names.
 
 lbl = Label(root, text="""
