@@ -394,7 +394,7 @@ def play_comp():
                 if game_board[r][c] == PLAYER_PIECE:
                     pygame.draw.circle(screen, RED, (
                     int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
-                elif board[r][c] == AI_PIECE:
+                elif game_board[r][c] == AI_PIECE:
                     pygame.draw.circle(screen, YELLOW, (
                     int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
         pygame.display.update()
