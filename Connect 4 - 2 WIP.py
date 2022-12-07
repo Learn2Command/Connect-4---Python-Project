@@ -329,7 +329,7 @@ def play_comp():
             column = random.choice(valid_locations)
             for col in valid_locations:
                 row = get_next_open_row(game_board, col)
-                board_copy = board.copy()
+                board_copy = game_board.copy()
                 drop_piece(board_copy, row, col, AI_PIECE)
                 new_score = minimax(board_copy, depth - 1, alpha, beta, False)[1]
                 if new_score > value:
@@ -345,7 +345,7 @@ def play_comp():
             column = random.choice(valid_locations)
             for col in valid_locations:
                 row = get_next_open_row(game_board, col)
-                board_copy = board.copy()
+                board_copy = game_board.copy()
                 drop_piece(board_copy, row, col, PLAYER_PIECE)
                 new_score = minimax(board_copy, depth - 1, alpha, beta, True)[1]
                 if new_score < value: 
