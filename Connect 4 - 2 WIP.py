@@ -32,6 +32,7 @@ COLUMN_COUNT = 7
 
 def two_player():
     def create_board():
+    """creates a board using row and column count provided for local play"""
         board = np.zeros((ROW_COUNT, COLUMN_COUNT))
         return board
 
@@ -47,6 +48,7 @@ def two_player():
                 return r
 
     def print_board(board):
+    """printing the board in a 6x7 form for local play"""
         print(np.flip(board, 0))
 
     def winning_move(board, piece):
@@ -80,6 +82,7 @@ def two_player():
 
         # Drawing the board with rectangle and circles, as well as adding the colors and sizes.
     def draw_board(board):
+    """draws out board with provided colors and sizes on local play"""
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
                 pygame.draw.rect(screen, BLUE, (c * SQUARESIZE, r * SQUARESIZE + SQUARESIZE, SQUARESIZE, SQUARESIZE))
@@ -197,6 +200,7 @@ def play_comp():
     WINDOW_LENGTH = 4
 
     def create_board():
+    """creates a board using row and column count provided for AI play"""
         board = np.zeros((ROW_COUNT, COLUMN_COUNT))
         return board
 
@@ -212,6 +216,7 @@ def play_comp():
                 return r
 
     def print_board(board):
+    """printing the board in a 6x7 form for AI play"""
         print(np.flip(board, 0))
 
     def winning_move(board, piece):
@@ -377,6 +382,7 @@ def play_comp():
 
       # Drawing the board with rectangle and circles, as well as adding the colors and sizes.
     def draw_board(board):
+    """draws out board with provided colors and sizes on AI play"""
         for c in range(COLUMN_COUNT):
             for r in range(ROW_COUNT):
                 pygame.draw.rect(screen, BLUE, (c * SQUARESIZE, r * SQUARESIZE + SQUARESIZE, SQUARESIZE, SQUARESIZE))
