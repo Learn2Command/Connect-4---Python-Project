@@ -248,7 +248,7 @@ def play_comp():
                         game_board[r - 3][c + 3] == piece:
                     return True
     
-    # The code below.
+    # This function creates PLAYER_PIECE & AI_PIECE.
     def evaluate_window(window, piece):
         score = 0
         opp_piece = PLAYER_PIECE
