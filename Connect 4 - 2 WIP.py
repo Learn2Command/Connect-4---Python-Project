@@ -37,6 +37,7 @@ def two_player():
         return game_board
 
     def drop_piece(game_board, row, col, piece):
+        """returns grid status after a piece is dropped in local play"""
         game_board[row][col] = piece
 
     def is_valid_location(game_board, col):
@@ -205,6 +206,7 @@ def play_comp():
         return game_board
 
     def drop_piece(game_board, row, col, piece):
+        """returns grid status after a piece is dropped in AI play"""
         game_board[row][col] = piece
 
     def is_valid_location(game_board, col):
