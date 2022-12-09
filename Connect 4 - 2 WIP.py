@@ -486,10 +486,10 @@ def play_comp():
                 turn += 1
                 turn = turn % 2
 
-        if game_over:
+        if game_over: #1 millisecond wait time to interact with UI after game over
             pygame.time.wait(1)
     
-    from sys import exit
+    from sys import exit #Solves issue with quitting after game loop is complete
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -511,7 +511,6 @@ root.config(menu=menubar)
 
 # Title of the game. Importing png file to use as logo on main menu
 
-
 root.title('Connect 4') 
 img = PhotoImage(file='connect4logo.png') # Importing the image we want to display as our logo.
 Label(
@@ -519,7 +518,7 @@ Label(
     image=img
 ).pack()
 
-# Icon Clip Art
+# Icon Clip Art imported and displayed on menu bar
 
 ico = Image.open('Connect 4 clip art.png')
 photo = ImageTk.PhotoImage(ico)
@@ -541,12 +540,17 @@ musicPlaying = True
 music_paused = False
 muted = FALSE
 
+# Function for volume level at max on
 def set_vol(val):
+    """set volume control for music which will allow following function to call"""
     volume = float(val) / 100
     mixer.music.set_volume(volume)
+    
     # set_volume of mixer takes value only from 0 to 1. Example - 0, 0.1,0.55,0.54.0.99,1
 
+    # Function to toggle volume to mute or sound on and off
 def mute_music():
+    """mute and unmute music"""
     global muted
     if muted:  # Unmute the music
         pygame.mixer.music.set_volume(0.7)
@@ -573,9 +577,11 @@ pygame.mixer.music.set_volume(0.7)
 twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
 playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp)
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
-twoplayer.pack()
-playcomp.pack()
-quitbutton.pack()
-volumeBtn.pack(side="right")
+twoplayer.pack() #Two Player Button
+playcomp.pack() # Play Computer Button
+quitbutton.pack() #Quit Button
+volumeBtn.pack(side="right") #Sound on and off button placed in bottom right of main menu
+
+#Anchors Tkinter main loop to root
 
 root.mainloop()
