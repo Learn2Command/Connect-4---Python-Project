@@ -7,6 +7,8 @@ import pygame
 import sys
 import math
 from PIL import Image, ImageTk
+from tkinter import messagebox
+from tkinter import ttk
 
 pygame.init() # Initialize all imported pygame modules.
 pygame.event.get() # Handles the internal events and retrieves a list of external events.
@@ -531,6 +533,41 @@ Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
 
+#Importing Music File To Use as Background Music for the Game
+
+pygame.mixer.music.load('arcademusic.wav')
+pygame.mixer.music.play(-1, 0.0)
+musicPlaying = True
+music_paused = False
+muted = FALSE
+
+def set_vol(val):
+    volume = float(val) / 100
+    mixer.music.set_volume(volume)
+    # set_volume of mixer takes value only from 0 to 1. Example - 0, 0.1,0.55,0.54.0.99,1
+
+def mute_music():
+    global muted
+    if muted:  # Unmute the music
+        pygame.mixer.music.set_volume(0.7)
+        volumeBtn.configure(image=volumePhoto)
+        scale.set(70)
+        muted = FALSE
+    else:  # mute the music
+        pygame.mixer.music.set_volume(0)
+        volumeBtn.configure(image=mutePhoto)
+        scale.set(0)
+        muted = TRUE
+
+# Adds Button and Icon to Toggle Sound On and Off as well as volume control sets
+        
+mutePhoto = PhotoImage(file='mute.png')
+volumePhoto = PhotoImage(file='volume.png')
+volumeBtn = Button(root, image=volumePhoto, command=mute_music)
+scale = ttk.Scale()
+scale.set(70)  # implement the default value of scale when music player starts
+pygame.mixer.music.set_volume(0.7)
+
 # Adds the option to choose between local, vs Comp play, or Quit on the menu using TKinter.
 
 twoplayer = Button(root, text="Local Multiplayer", pady=5, padx=20, command=two_player)
@@ -538,13 +575,9 @@ playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
 twoplayer.pack()
 playcomp.pack()
+volumeBtn.pack()
 quitbutton.pack()
 
-# Adds background music while playing the game by importing file
-
-pygame.mixer.music.load('arcademusic.wav')
-pygame.mixer.music.play(-1,0.0)
-musicPlaying = True
 
 #if event.type == KEYDOWN:
     #if event.key == K_m:
