@@ -575,9 +575,8 @@ playcomp = Button(root, text="Play Computer", pady=5, padx=20, command=play_comp
 quitbutton = Button(root, text="Quit", pady=5, padx=20, command=root.destroy)
 twoplayer.pack()
 playcomp.pack()
-volumeBtn.pack()
 quitbutton.pack()
-
+volumeBtn.pack(side="right")
 
 #if event.type == KEYDOWN:
     #if event.key == K_m:
