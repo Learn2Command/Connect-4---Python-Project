@@ -532,6 +532,96 @@ Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
 
+
+
+# # Adding Player Names for Two Player Game
+# 
+# 
+# def player_names():
+# 
+#     top = Toplevel()
+#     top.title('Input Player Names')
+#     top.geometry('400x200')
+#     global play2p1
+#     global play2p2
+#     play2p1 = []
+#     play2p2 = []
+# 
+#     #def list_names():
+# 
+# 
+#     def getplayer1():
+#         p1name = Label(top, text=name_p1.get() + ", Ready to Play!")
+#         p1name.pack()
+#         return p1name
+# 
+#     def getplayer2():
+#         p2name = Label(top, text=name_p2.get() + ", Ready to Play!")
+#         p2name.pack()
+#         return p2name
+# 
+#     def two_player_button():
+#         play2p = two_player()
+#         return play2p
+# 
+#     def close_window():
+#         top.destroy()
+#         top.update()
+# 
+#     Label(top, text="Enter Player 1 Name").pack()
+#     global name_p1
+#     name_p1 = Entry(top)
+#     name_p1.pack()
+#     play2p1.append(getplayer1)
+#     name_p1.insert(0, "Player 1")
+# 
+#     Button(top, text="Register Player 1", command=getplayer1).pack()
+# 
+#     Label(top, text="Enter Player 2 Name").pack()
+#     global name_p2
+#     name_p2 = Entry(top)
+#     name_p2.pack()
+#     play2p2.append(getplayer2)
+#     name_p2.insert(0, "Player 2")
+# 
+#     Button(top, text="Register Player 2", command=getplayer2).pack()
+# 
+#     Button(top, text="Play Game", pady=5, padx=20, command=two_player)
+#     playgame = Button(top, text="Play Game", pady=5, padx=20, command=lambda: [close_window(), two_player_button()])
+#     playgame.pack()
+# 
+# 
+# #Adding Player Name for One Player vs Computer Game
+# 
+# def player_names2():
+# 
+#     top = Toplevel()
+#     top.title('Input Player Name')
+#     top.geometry('400x100')
+# 
+#     def get_player1():
+#         p1name = name_cp1.get()
+#         return messagebox.showinfo('message', f'{p1name}, Ready to Play!')
+# 
+#     def one_player_button():
+#         play1p = play_comp()
+#         return play1p
+# 
+#     def close_window():
+#         top.destroy()
+#         top.update()
+# 
+#     Label(top, text="Enter Player Name").pack()
+#     global name_cp1
+#     name_cp1 = Entry(top)
+#     name_cp1.pack()
+# 
+#     Button(top, text="Register Player", command=get_player1).pack()
+#     Button(top, text="Play Game", pady=5, padx=20, command=play_comp)
+#     playgame = Button(top, text="Play Game", pady=5, padx=20, command=lambda: [close_window(), one_player_button()])
+#     playgame.pack()
+
+
 #Importing Music File To Use as Background Music for the Game
 
 pygame.mixer.music.load('arcademusic.wav')
