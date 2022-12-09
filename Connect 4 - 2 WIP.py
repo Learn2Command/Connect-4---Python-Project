@@ -578,12 +578,4 @@ playcomp.pack()
 quitbutton.pack()
 volumeBtn.pack(side="right")
 
-#if event.type == KEYDOWN:
-    #if event.key == K_m:
-        #if musicPlaying:
-            #pygame.mixer.music.stop()
-        #else:
-            #pygame.mixer.music.play(-1, 0.0)
-        #musicPlaying = not musicPlaying
-
 root.mainloop()
