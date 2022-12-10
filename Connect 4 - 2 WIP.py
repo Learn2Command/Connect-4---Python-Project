@@ -184,6 +184,32 @@ def two_player():
                     pygame.time.wait(1)
     from sys import exit
     while True:
+        # load button images
+        start_img = pygame.image.load('replayb.png').convert_alpha()
+        exit_img = pygame.image.load('exitb.png').convert_alpha()
+
+        # create button instances
+        start_button = RQButton(150, 350, start_img, 0.5)
+        exit_button = RQButton(370, 350, exit_img, 0.5)
+
+        # game loop
+        run = True
+        while run:
+
+            if start_button.draw(screen):
+                run = two_player()
+            if exit_button.draw(screen):
+                run = False
+
+            # event handler
+            for event in pygame.event.get():
+                # quit game
+                if event.type == pygame.QUIT:
+                    run = False
+
+            pygame.display.update()
+        pygame.quit()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -491,6 +517,32 @@ def play_comp():
     
     from sys import exit #Solves issue with quitting after game loop is complete
     while True:
+        # load button images
+        start_img = pygame.image.load('replayb.png').convert_alpha()
+        exit_img = pygame.image.load('exitb.png').convert_alpha()
+
+        # create button instances
+        start_button = RQButton(150, 350, start_img, 0.5)
+        exit_button = RQButton(370, 350, exit_img, 0.5)
+
+        # game loop
+        run = True
+        while run:
+
+            if start_button.draw(screen):
+                run = play_comp()
+            if exit_button.draw(screen):
+                run = False
+
+            # event handler
+            for event in pygame.event.get():
+                # quit game
+                if event.type == pygame.QUIT:
+                    run = False
+
+            pygame.display.update()
+        pygame.quit()
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -532,7 +584,33 @@ Created By Geoffrey Chambers, Estuardo Mendez, Tahlia Canovas, and Jimmy Riera
 lbl.place(x=40,y=195)
 lbl.pack(expand=YES, fill=BOTH)
 
+class RQButton():
+	def __init__(self, x, y, image, scale):
+		width = image.get_width()
+		height = image.get_height()
+		self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+		self.rect = self.image.get_rect()
+		self.rect.topleft = (x, y)
+		self.clicked = False
 
+	def draw(self, surface):
+		action = False
+		#get mouse position
+		pos = pygame.mouse.get_pos()
+
+		#check mouseover and clicked conditions
+		if self.rect.collidepoint(pos):
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				self.clicked = True
+				action = True
+
+		if pygame.mouse.get_pressed()[0] == 0:
+			self.clicked = False
+
+		#draw button on screen
+		surface.blit(self.image, (self.rect.x, self.rect.y))
+
+		return action
 
 # # Adding Player Names for Two Player Game
 # 
