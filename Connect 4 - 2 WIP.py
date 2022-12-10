@@ -181,7 +181,7 @@ def two_player():
                 turn = turn % 2
 
                 if game_over:
-                    pygame.time.wait(1)
+                    pygame.time.wait(1000)
     from sys import exit
     while True:
         # load button images
@@ -215,7 +215,8 @@ def two_player():
                 pygame.quit()
                 exit()
                 
-
+# Adding comment for separation between two player code and AI Code
+# Adding comment for separation and to differentiate more readily between AI code and two player code
 # Defining a function for playing against AI/Computer. This function will be called to the menu button playcomp and run the Connect 4 with AI code held within.
 
 def play_comp():
@@ -513,7 +514,7 @@ def play_comp():
                 turn = turn % 2
 
         if game_over: #1 millisecond wait time to interact with UI after game over
-            pygame.time.wait(1)
+            pygame.time.wait(1000)
     
     from sys import exit #Solves issue with quitting after game loop is complete
     while True:
